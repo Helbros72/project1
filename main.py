@@ -1,39 +1,46 @@
-
-first_phrase = [ 'Believe', 'you', 'can' ]
-second_phrase = [ 'Clear' , 'the' , 'air' ]
-_under=[]
+first_phrase = ['Believe', 'you', 'can']
+second_phrase = ['Clear', 'the', 'air']
+_under = []
 i = 0
-j = 0
-phrase = int (input ( ' Choose phrase : 1 or 2 '))
-#def print_cavim () :
-print(); print (' Guess phrase :'); print()
-if phrase == 1 :
+phrase = int(input(' Choose phrase : 1 or 2 '))
+print();
+print(' Guess phrase :');
+print()
+if phrase == 1:
     _under = ['_' * len(_word) for _word in first_phrase]
-else :
+    _phrase = first_phrase
+else:
     _under = ['_' * len(_word) for _word in second_phrase]
+    _phrase = second_phrase
 print(_under)
+success_letters = []
+while True:
+    _letter = input('Enter letter : ')
+    count = 0
 
-# this is more complicated than a list of letters
-#def _phrase () :
-    #i = 0
-_letter = input('Enter letter : ')
-for _word_index in range(len(first_phrase)):
-    new_word = ''
-    for _letter_index in range(len(first_phrase[_word_index])):
-            #print(first_phrase[_word_index][_letter_index], end=' ')
-        if first_phrase[_word_index][_letter_index] == _letter:
-            new_word += _letter
-            i += 5
-            print('You guess ! ')
-            print('Your score :', i)
-
-
-        else :
-            new_word += _under[_word_index][_letter_index]
-    _under[_word_index] = new_word
-
-print(_under)
-
-
-
-
+    for _word in _phrase:
+        count += _word.count(_letter)
+    if count == 0:
+        print('No')
+        i -= 1
+    else:
+        success_letters.append(_letter)
+        i += 5
+        print('You guess ! ')
+        print('Your score :', i)
+    # print word with underscores:
+    under_phrase = ''
+    for _word1 in _phrase:
+        for l in _word1:
+            if l in success_letters:
+                under_phrase += l
+            else:
+                under_phrase += '_'
+        under_phrase += ' '
+    print(under_phrase)
+    if '_' not in under_phrase:
+        print()
+        print('Game over')
+        print()
+        print('YOUR SCORE !!!', i)
+        break;
